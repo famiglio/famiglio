@@ -1,9 +1,26 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": ["default"],
-    "sharedGlobals": []
+    "default": [
+      "{projectRoot}/**/*",
+      "!{projectRoot}/dist/**",
+      "!{projectRoot}/README.md",
+      "!{projectRoot}/CHANGELOG.md",
+      "!{projectRoot}/**/*.spec.*",
+      "sharedGlobals"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/**/*.test.*",
+      "!{projectRoot}/**/*.spec.*",
+      "!{projectRoot}/jest.*",
+      "!{projectRoot}/vitest.*"
+    ],
+    "sharedGlobals": [
+      "{workspaceRoot}/LICENSE",
+      "{workspaceRoot}/tsconfig.base.json",
+      "{workspaceRoot}/package.json"
+    ]
   },
   "plugins": [
     {
@@ -19,6 +36,67 @@
           "watchDepsName": "watch-deps"
         }
       }
+    },
+    {
+      "plugin": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps",
+        "serveStaticTargetName": "serve-static"
+      }
     }
-  ]
+  ],
+  "generators": {
+    "@nx/plugin:plugin": {
+      "compiler": "tsc",
+      "e2eTestRunner": "none",
+      "unitTestRunner": "none",
+      "linter": "none",
+      "publishable": false,
+      "skipLintChecks": true
+    },
+    "@nx/plugin:executor": {
+      "skipLintChecks": true,
+      "unitTestRunner": "none"
+    },
+    "@nx/plugin:generator": {
+      "skipLintChecks": true,
+      "unitTestRunner": "none"
+    },
+    "@nx/js:library": {
+      "bundler": "tsc",
+      "includeBabelRc": false,
+      "linter": "none",
+      "minimal": true,
+      "publishable": false,
+      "strict": true,
+      "unitTestRunner": "none"
+    },
+    "@nx/node:application": {
+      "bundler": "webpack",
+      "e2eTestRunner": "none",
+      "framework": "none",
+      "linter": "none",
+      "port": 4000,
+      "unitTestRunner": "none"
+    },
+    "@nx/node:library": {
+      "compiler": "tsc",
+      "linter": "none",
+      "publishable": false,
+      "strict": true,
+      "unitTestRunner": "none"
+    }
+  },
+  "targetDefaults": {
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"],
+      "outputs": ["{projectRoot}/dist"]
+    }
+  }
 }

@@ -1,0 +1,34 @@
+name: '📚 Documentation Request'
+description: Suggest improvements or report issues in **our organization's documentation**.
+title: '[DOCS] <short description>'
+labels: [documentation]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Documentation Request
+        Thank you for helping **us** improve **our** documentation and guides!
+
+  - type: textarea
+    id: docs-problem
+    attributes:
+      label: Problem or Gap
+      description: What's missing, confusing, or incorrect in the docs? Please specify which **document, service, or project** the issue relates to.
+      placeholder: 'In the "Service X Deployment Guide," the setup instructions are unclear...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-change
+    attributes:
+      label: Suggested Change
+      description: How would you improve the documentation for the benefit of **all users**?
+      placeholder: 'Add an example of ... / Clarify that ... / Update the screenshot on page 5.'
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any links, references, or screenshots that help explain the change. **If possible, please include a direct link to the affected page.**

@@ -1,0 +1,57 @@
+name: '💡 Feature Request'
+description: Suggest a new idea or improvement for any of **our organization's services or projects**.
+title: '[FEAT] <short description>'
+labels: [enhancement]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request
+        Thank you for helping **us** improve! Please clearly explain the improvement **you'd like to see in our systems.**
+
+  - type: input
+    id: project-or-service
+    attributes:
+      label: Affected Project or Service
+      description: Which project, repository, or service is this feature relevant to?
+      placeholder: 'Core API, Frontend App X, Documentation, etc.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Describe the Feature
+      description: What specific feature would you like **us** to add?
+      placeholder: 'Add support for ... / Introduce a new endpoint for ...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Motivation and Use Case
+      description: Why is this feature important? What specific problem will it solve for **our users or team**?
+      placeholder: 'This would allow **our users** to ... and significantly improve performance.'
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution (Optional)
+      description: If you have an idea, describe how you envision this feature working.
+      placeholder: 'Implement via ... / Use the existing library for ...'
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you thought about different approaches or workarounds?
+      placeholder: 'Alternatively, we could ... but it has the drawback of ...'
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add screenshots, references, or extra details that would help **us** understand your request.

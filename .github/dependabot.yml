@@ -1,0 +1,51 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    ignore:
+      - dependency-name: 'nx'
+        versions: ['*']
+      - dependency-name: '@nx/*'
+        versions: ['*']
+
+  - package-ecosystem: 'npm'
+    directory: '/apps'
+    schedule:
+      interval: 'weekly'
+    ignore:
+      - dependency-name: 'nx'
+        versions: ['*']
+      - dependency-name: '@nx/*'
+        versions: ['*']
+
+  - package-ecosystem: 'npm'
+    directory: '/libs'
+    schedule:
+      interval: 'weekly'
+    ignore:
+      - dependency-name: 'nx'
+        versions: ['*']
+      - dependency-name: '@nx/*'
+        versions: ['*']
+
+  - package-ecosystem: 'npm'
+    directory: '/packages'
+    schedule:
+      interval: 'weekly'
+    ignore:
+      - dependency-name: 'nx'
+        versions: ['*']
+      - dependency-name: '@nx/*'
+        versions: ['*']
+
+  - package-ecosystem: 'npm'
+    directory: '/tools'
+    schedule:
+      interval: 'weekly'
+    ignore:
+      - dependency-name: 'nx'
+        versions: ['*']
+      - dependency-name: '@nx/*'
+        versions: ['*']

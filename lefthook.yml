@@ -1,0 +1,8 @@
+remotes:
+  - git_url: git@github.com:famiglio/lefthook
+    ref: 0.1.0
+    refetch: true
+    refetch_frequency: '24h'
+    configs:
+      - configs/lint-commit-msg.yml
+      - configs/lint-fmt-staged.yml
