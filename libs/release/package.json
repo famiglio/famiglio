@@ -1,14 +1,19 @@
 {
-  "name": "@famiglio/github",
+  "name": "@famiglio/release",
   "version": "0.0.1",
   "private": false,
-  "description": "Utilities for automating GitHub operations for Nx-based",
+  "description": "A modular release automation toolkit that detects and executes repository release workflows across Nx, Lerna, Release-It, and custom strategies.",
   "keywords": [
-    "github",
-    "nx",
     "release",
     "automation",
-    "octokit"
+    "nx",
+    "lerna",
+    "release-it",
+    "monorepo",
+    "ci",
+    "cd",
+    "github",
+    "famiglio"
   ],
   "homepage": "https://github.com/famiglio/famiglio#readme",
   "bugs": {
@@ -16,17 +21,27 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/famiglio/famiglio"
+    "url": "https://github.com/famiglio/famiglio",
+    "directory": "libs/release"
   },
   "license": "MIT",
   "type": "module",
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@famiglio/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./flavors": {
+      "types": "./dist/flavors/index.d.ts",
+      "import": "./dist/flavors/index.js",
+      "default": "./dist/flavors/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.js",
+      "default": "./dist/types/index.js"
     }
   },
   "main": "./dist/index.js",
@@ -37,24 +52,21 @@
     "LICENSE"
   ],
   "dependencies": {
-    "@octokit/auth-app": "^8.1.1",
-    "@octokit/rest": "^22.0.0",
-    "tslib": "^2.3.0",
-    "zod": "^4.1.12"
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@types/node": "^24.7.0",
-    "tsdown": "^0.15.6"
+    "tsdown": "^0.15.6",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "publishConfig": {
     "access": "public"
   },
   "nx": {
-    "name": "github",
-    "tags": [
-      "type:lib",
-      "scope:github"
-    ],
+    "name": "release",
     "targets": {
       "build": {
         "executor": "nx:run-commands",

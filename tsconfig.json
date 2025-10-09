@@ -4,7 +4,7 @@
   "files": [],
   "references": [
     {
-      "path": "./libs/github"
+      "path": "./libs/release"
     }
   ]
 }
