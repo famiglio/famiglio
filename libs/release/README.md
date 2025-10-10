@@ -84,6 +84,6 @@ Then register it in your own resolver or extend the default one.
 
 ---
 
-## 🛡️ License
+## License
 
 MIT © [Famiglio](https://github.com/famiglio)
