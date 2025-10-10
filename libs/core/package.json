@@ -1,12 +1,14 @@
 {
   "name": "@famiglio/core",
   "version": "0.0.1",
-  "private": true,
-  "description": "Famiglio's core utilities",
+  "private": false,
+  "description": "Core utilities for all Famiglio packages",
   "keywords": [
-    "famiglio",
-    "utils",
-    "utilities"
+    "core",
+    "logging",
+    "env",
+    "error",
+    "famiglio"
   ],
   "homepage": "https://github.com/famiglio/famiglio#readme",
   "bugs": {
@@ -14,18 +16,31 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/famiglio/famiglio",
-    "directory": "libs/release"
+    "url": "https://github.com/famiglio/famiglio"
   },
   "license": "MIT",
   "type": "module",
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@famiglio/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./env": {
+      "types": "./dist/env/index.d.ts",
+      "import": "./dist/env/index.js",
+      "default": "./dist/env/index.js"
+    },
+    "./errors": {
+      "types": "./dist/errors/index.d.ts",
+      "import": "./dist/errors/index.js",
+      "default": "./dist/errors/index.js"
+    },
+    "./logger": {
+      "types": "./dist/logger/index.d.ts",
+      "import": "./dist/logger/index.js",
+      "default": "./dist/logger/index.js"
     }
   },
   "main": "./dist/index.js",
@@ -36,11 +51,17 @@
     "LICENSE"
   ],
   "dependencies": {
-    "tslib": "^2.3.0"
+    "pino": "^10.0.0",
+    "pino-pretty": "^13.1.2",
+    "tslib": "^2.3.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
-    "@types/node": "^24.7.1",
+    "@types/node": "^24.7.0",
     "tsdown": "^0.15.6"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "nx": {
     "name": "core",
