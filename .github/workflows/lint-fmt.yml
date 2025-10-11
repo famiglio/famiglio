@@ -16,14 +16,14 @@ jobs:
     if: github.event_name != 'push' || github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Permission required to commit and push changes
+      contents: write
       actions: write
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
         with:
-          # Required to push changes without authentication issues.
+          ref: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
