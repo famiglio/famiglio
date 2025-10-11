@@ -63,7 +63,7 @@
   "editor.tabCompletion": "on",
   "eslint.debug": true,
   "eslint.format.enable": true,
-  "eslint.run": "onSave",
+  "eslint.run": "onType",
   "eslint.useFlatConfig": true,
   "eslint.validate": ["javascript", "typescript", "json", "jsonc", "markdown"],
   "eslint.workingDirectories": [
