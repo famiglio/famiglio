@@ -53,7 +53,7 @@
   },
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
+    "source.fixAll.eslint": "never",
     "source.fixAll.shellcheck": "explicit"
   },
   "editor.formatOnSave": true,
