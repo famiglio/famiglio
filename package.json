@@ -59,6 +59,7 @@
     "@eslint/js": "^9.37.0",
     "@eslint/json": "^0.13.2",
     "@eslint/markdown": "^7.4.0",
+    "@famiglio/core": "^0.0.1",
     "@nx/js": "21.6.4",
     "@nx/node": "21.6.4",
     "@nx/web": "21.6.4",

@@ -42,6 +42,11 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/types/index.js",
       "default": "./dist/types/index.js"
+    },
+    "./errors": {
+      "types": "./dist/errors/index.d.ts",
+      "import": "./dist/errors/index.js",
+      "default": "./dist/errors/index.js"
     }
   },
   "main": "./dist/index.js",
@@ -52,7 +57,9 @@
     "LICENSE"
   ],
   "dependencies": {
-    "tslib": "^2.3.0"
+    "@famiglio/core": "^0.0.1",
+    "tslib": "^2.3.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/node": "^24.7.0",

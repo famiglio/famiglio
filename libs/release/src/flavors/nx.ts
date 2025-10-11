@@ -1,56 +1,58 @@
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
 
+import { logger } from '@famiglio/core/logger';
+import { AdapterError } from '../errors/adapter-error.js';
 import type { ReleaseAdapter } from '../types/release-adapter.js';
 
 const execAsync = promisify(exec);
 
 /**
  * Nx flavor release adapter.
- * Uses Nx CLI to handle tagging, changelogs, and GitHub releases automatically.
- *
+ * Handles automatic release workflows using Nx CLI commands.
  * @implements {ReleaseAdapter}
  */
 export class NxReleaseAdapter implements ReleaseAdapter {
   /**
-   * Detects if the current repository is an Nx workspace by checking for the
-   * existence and execution of the `nx` command.
-   *
-   * @param {string} repoPath The path to the root of the repository.
-   * @returns {Promise<boolean>} A promise that resolves to `true` if Nx is
-   * detected and accessible, otherwise `false`.
+   * Detects if Nx is available in the repository by checking its version.
+   * Uses `nx --version`.
+   * @param {string} repoPath - The root path of the repository to check.
+   * @returns {Promise<boolean>} A promise that resolves to `true` if Nx is detected, otherwise `false`.
    */
   async detect(repoPath: string): Promise<boolean> {
     try {
-      // Attempt to run 'nx --version'. If successful, stdout will contain
-      // the version string, indicating Nx is available.
       const { stdout } = await execAsync('nx --version', { cwd: repoPath });
+      logger.debug(`Nx detected: ${stdout.trim()}`);
       return stdout.trim().length > 0;
-    } catch {
-      // If the command fails (e.g., 'nx' is not found), catch the error and
-      // return false.
+    } catch (error) {
+      logger.debug('Nx not detected in repository', { repoPath, err: error });
       return false;
     }
   }
 
   /**
-   * Executes the Nx release process using the Nx CLI command.
-   * This typically handles version bumping, generating changelogs, tagging the
-   * release, and publishing packages (if configured in the Nx workspace).
-   *
-   * @returns {Promise<void>} A promise that resolves when the Nx release
-   * process is complete.
+   * Executes the Nx release process using `npx nx release --first-release --yes`.
+   * The `--yes` flag skips confirmation prompts, and `--first-release` may be used
+   * for an initial release.
+   * @returns {Promise<void>} A promise that resolves when the Nx release is complete.
+   * @throws {AdapterError} If the Nx command fails to execute.
    */
   async release(): Promise<void> {
-    // The '--yes' flag skips confirmation prompts.
-    // The '--first-release' flag avoid errors in releasing eventual new projects.
-    await execAsync('npx nx release --first-release --yes');
+    try {
+      logger.info('Starting Nx release...');
+      // Execute Nx release command. Note: --first-release might be optional depending on the context.
+      await execAsync('npx nx release --first-release --yes');
+      logger.info('Nx release completed successfully.');
+    } catch (error) {
+      logger.error('Nx release failed', { err: error });
+      // Wrap the error in an AdapterError for standardized error handling
+      throw new AdapterError('Nx release execution failed', { cause: error });
+    }
   }
 
   /**
-   * Gets the unique name of this release adapter.
-   *
-   * @returns {string} The name of the adapter, which is 'nx'.
+   * Gets the name of the release adapter.
+   * @returns {string} The string `'nx'`.
    */
   getName(): string {
     return 'nx';
