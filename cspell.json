@@ -1,13 +1,9 @@
 {
   "version": "0.2",
-
   "enabled": true,
   "enableGlobDot": true,
-
   "language": "en",
-
   "loadDefaultConfiguration": true,
-
   "ignorePaths": [
     "**/*LICENSE*",
     "**/*.log",
@@ -88,24 +84,22 @@
     "**/connect.lock",
     ".github/instructions/nx.instructions.md"
   ],
-
   "allowCompoundWords": true,
   "caseSensitive": false,
-
   "words": [
-    "davide",
     "criscito",
+    "davide",
     "dcdavidev",
-    "famiglio",
-    "vuoto",
     "dotenvx",
-    "tabler",
+    "esbenp",
+    "famiglio",
     "gopath",
-    "ipynb",
     "hiberfil",
-    "esbenp"
+    "ipynb",
+    "stefanzweifel",
+    "tabler",
+    "vuoto"
   ],
-
   "dictionaries": [
     "en-gb",
     "en_US",
