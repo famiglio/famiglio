@@ -19,10 +19,6 @@
     "url": "https://github.com/famiglio/famiglio"
   },
   "license": "MIT",
-  "workspaces": [
-    "apps/*",
-    "libs/*"
-  ],
   "scripts": {
     "build": "nx run-many -t build",
     "commit": "cz",
@@ -47,10 +43,6 @@
       "path": "./node_modules/cz-git"
     }
   },
-  "dependencies": {
-    "pino": "^10.0.0",
-    "pino-pretty": "^13.1.2"
-  },
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
@@ -59,7 +51,6 @@
     "@eslint/js": "^9.37.0",
     "@eslint/json": "^0.13.2",
     "@eslint/markdown": "^7.4.0",
-    "@famiglio/core": "^0.0.1",
     "@nx/js": "21.6.4",
     "@nx/node": "21.6.4",
     "@nx/web": "21.6.4",
@@ -67,6 +58,8 @@
     "@nx/workspace": "21.6.4",
     "@octokit/auth-app": "^8.1.1",
     "@octokit/rest": "^22.0.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "@svgr/webpack": "^8.0.1",
     "@swc-node/register": "^1.11.1",
     "@swc/core": "^1.13.5",
     "@swc/helpers": "^0.5.17",
@@ -89,6 +82,8 @@
     "jsonc-eslint-parser": "^2.4.1",
     "lefthook": "^1.13.6",
     "nx": "21.6.4",
+    "pino": "^10.0.0",
+    "pino-pretty": "^13.1.2",
     "prettier": "^3.6.2",
     "prettier-plugin-ini": "^1.3.0",
     "prettier-plugin-packagejson": "^2.5.19",
@@ -96,6 +91,7 @@
     "prettier-plugin-properties": "^0.3.0",
     "prettier-plugin-sh": "^0.18.0",
     "prettier-plugin-toml": "^2.0.6",
+    "react-refresh": "^0.10.0",
     "tsdown": "^0.15.6",
     "tslib": "^2.3.0",
     "typescript": "~5.9.2",
