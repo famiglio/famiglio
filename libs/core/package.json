@@ -2,6 +2,23 @@
   "name": "@famiglio/core",
   "version": "0.0.1",
   "private": true,
+  "description": "Famiglio core utilities",
+  "keywords": [
+    "famiglio",
+    "core",
+    "utils",
+    "utilities",
+    "node"
+  ],
+  "homepage": "https://github.com/famiglio/famiglio#readme",
+  "bugs": {
+    "url": "https://github.com/famiglio/famiglio/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/famiglio/famiglio"
+  },
+  "license": "MIT",
   "type": "module",
   "exports": {
     "./package.json": "./package.json",
@@ -15,8 +32,17 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
   "dependencies": {
     "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.2",
+    "tsdown": "^0.15.6",
+    "typescript": "^5.9.3"
   },
   "nx": {
     "name": "core",

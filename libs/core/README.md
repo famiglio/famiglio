@@ -1,6 +1,23 @@
 # @famiglio/core
 
-> Shared utilities.
+> Shared _core_ utilities.
+
+## NODE_ENV
+
+Define the right Node environments.
+
+- development
+- testing
+- staging
+- production
+
+### Usage
+
+```ts
+import { getNodeEnv } from '@famiglio/core';
+
+export const NODE_ENV = getNodeEnv();
+```
 
 ---
 
