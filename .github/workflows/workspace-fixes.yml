@@ -1,4 +1,4 @@
-name: Linting and Formatting
+name: Check and Fix Workspace
 
 on:
   push:
@@ -7,24 +7,28 @@ on:
   pull_request:
     branches:
       - main
-    types: [opened, synchronize, reopened] # Run on PR changes
+    types: [opened, synchronize, reopened]
 
 jobs:
-  lint_and_format_fix:
-    # Run this job only if it's not a push to the main branch.
-    # Automatic commit is safer and more useful on PR branches.
+  'workspace-fixes':
     if: github.event_name != 'push' || github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      actions: write
 
     steps:
-      - name: Checkout Code
+      - name: Checkout PR branch (same-repo PR)
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
         uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Checkout merge ref (forked PR or non-PR)
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository }}
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref }}
           fetch-depth: 0
 
       - name: Setup Node.js (Read from .nvmrc)
@@ -36,14 +40,18 @@ jobs:
       - name: Install Dependencies
         run: npm install --ignore-scripts
 
+      - name: Sync Workspace
+        run: npx nx sync
+
       - name: Lint Code with ESLint
         run: npx eslint --fix .
 
       - name: Format Code with Prettier
         run: npx prettier --write .
 
-      - name: Auto-Commit Formatted Files
+      - name: Auto-Commit Files
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'ci: format code with prettier'
+          commit_message: 'ci: lint and format'
           branch: ${{ github.head_ref }}
