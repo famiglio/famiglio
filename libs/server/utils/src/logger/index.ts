@@ -1,7 +1,7 @@
-export { logger } from './logger/logger.js';
+export { logger } from './logger.js';
 export {
   DEFAULT_LOGGER_LEVEL,
   LOG_LEVELS,
   LoggerLevelEnum,
   LoggerLevelSchema,
-} from './logger/schema.js';
+} from './schema.js';
