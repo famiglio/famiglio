@@ -1,7 +1,9 @@
-export { logger } from './logger.js';
+export { getLogLevel } from './get-log-level.js';
+export type { LogLevel } from './log-level.js';
 export {
-  DEFAULT_LOGGER_LEVEL,
+  DEFAULT_LOG_LEVEL,
   LOG_LEVELS,
-  LoggerLevelEnum,
-  LoggerLevelSchema,
-} from './schema.js';
+  LogLevelEnum,
+  LogLevelSchema,
+} from './log-level.js';
+export { logger } from './logger.js';
