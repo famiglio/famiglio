@@ -21,7 +21,8 @@
   "license": "MIT",
   "workspaces": [
     "apps/*",
-    "libs/server/*"
+    "libs/server/*",
+    "libs/core"
   ],
   "scripts": {
     "build": "nx run-many -t build",
