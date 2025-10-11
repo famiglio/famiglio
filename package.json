@@ -19,6 +19,9 @@
     "url": "https://github.com/famiglio/famiglio"
   },
   "license": "MIT",
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "build": "nx run-many -t build",
     "commit": "cz",
