@@ -20,7 +20,8 @@
   },
   "license": "MIT",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "libs/server/*"
   ],
   "scripts": {
     "build": "nx run-many -t build",
