@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write # Permission required to commit and push changes
+      actions: write
 
     steps:
       - name: Checkout Code
