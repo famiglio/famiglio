@@ -1,21 +1,18 @@
 # @famiglio/release
 
-> A modular release automation toolkit for monorepos and single-package repositories.
+A modular library for automating releases in repositories using different release tools.
 
-`@famiglio/release` provides a unified interface for detecting and executing release workflows across multiple tools such as **Nx**, **Lerna**, and **Release-It** — with a **manual fallback** for custom setups.  
-It’s designed to be extended easily with new “flavors” to match any release strategy.
+## Features
 
----
-
-## 🚀 Features
-
-- 🔍 **Auto-detects** which release tool a repository uses.
-- 🧩 **Adapter-based architecture** — Nx, Lerna, Release-It, and custom flavors.
-- ⚙️ **Unified interface** for running releases programmatically.
-- 🪶 **Lightweight & dependency-free** (only uses native Node APIs).
-- 🧱 Ideal as a building block for higher-level orchestrators or GitHub Apps (like [Famiglio](https://github.com/famiglio)).
-
----
+- Automatically detects the release "flavor" of a repository:
+  - Nx
+  - Lerna
+  - Release-It
+  - Manual fallback
+- Unified release workflow via `ReleaseRunner`.
+- Safe error handling with `ReleaseError` and `AdapterError`.
+- Extensible: add custom adapters for new release tools.
+- Logging via `@famiglio/core/logger`.
 
 ## Installation
 
@@ -23,66 +20,33 @@ It’s designed to be extended easily with new “flavors” to match any releas
 npm install @famiglio/release
 ```
 
----
-
 ## Usage
 
 ```ts
-import { resolveAdapter } from '@famiglio/release';
+import { ReleaseRunner } from '@famiglio/release';
 
-async function runRelease() {
-  const adapter = await resolveAdapter({ repo: process.cwd() });
-
-  if (!adapter) {
-    console.error('No release adapter found.');
-    process.exit(1);
-  }
-
-  console.log(`Detected adapter: ${adapter.getName()}`);
-  await adapter.release();
-}
-
-runRelease();
+const runner = new ReleaseRunner('/path/to/repo');
+await runner.run();
 ```
 
----
+## Creating Custom Adapters
 
-## Flavors
-
-| Adapter        | Detection method                     | Release command           |
-| -------------- | ------------------------------------ | ------------------------- |
-| **Nx**         | Detects `nx.json` or Nx CLI presence | `npx nx release --yes`    |
-| **Lerna**      | Detects `lerna.json` or CLI presence | `npx lerna version --yes` |
-| **Release-It** | Detects `release-it` config or CLI   | `npx release-it --ci`     |
-| **Manual**     | Always available fallback            | Logs message only         |
-
----
-
-## Extending with custom flavors
-
-You can define your own adapter by implementing the `ReleaseAdapter` interface:
+Implement the `ReleaseAdapter` interface:
 
 ```ts
-import { ReleaseAdapter } from '@famiglio/release';
+import type { ReleaseAdapter } from '@famiglio/release';
 
-export class MyCustomAdapter implements ReleaseAdapter {
-  async detect(repoPath: string) {
-    return repoPath.includes('my-custom-repo');
-  }
-
-  async release() {
-    console.log('Running my custom release logic...');
-  }
-
-  getName() {
-    return 'my-custom';
-  }
+class MyAdapter implements ReleaseAdapter {
+  async detect(repoPath: string): Promise<boolean> { ... }
+  async release(): Promise<void> { ... }
+  getName(): string { return 'my-adapter'; }
 }
 ```
 
-Then register it in your own resolver or extend the default one.
+## Errors
 
----
+- `ReleaseError` – thrown when a release fails.
+- `AdapterError` – thrown when a flavor adapter encounters an error.
 
 ## License
 
