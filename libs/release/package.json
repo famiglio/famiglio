@@ -33,6 +33,11 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
+    "./errors": {
+      "types": "./dist/errors/index.d.ts",
+      "import": "./dist/errors/index.js",
+      "default": "./dist/errors/index.js"
+    },
     "./flavors": {
       "types": "./dist/flavors/index.d.ts",
       "import": "./dist/flavors/index.js",
@@ -42,11 +47,6 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/types/index.js",
       "default": "./dist/types/index.js"
-    },
-    "./errors": {
-      "types": "./dist/errors/index.d.ts",
-      "import": "./dist/errors/index.js",
-      "default": "./dist/errors/index.js"
     }
   },
   "main": "./dist/index.js",
