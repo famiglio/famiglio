@@ -1,7 +1,4 @@
-// base-error.ts
-import { ZodError } from 'zod';
-
-import { ErrorMetadata, ErrorMetadataSchema } from './schema.js';
+import { ErrorMetadataSchema } from './schema.js';
 import type { ErrorMetadataInput, ErrorMetadataOutput } from './schema.js';
 
 /**
@@ -43,7 +40,6 @@ export class BaseError extends Error {
 
     const validatedMetadata = this.validateMetadata(metadata, message);
 
-    // Assegna le proprietà validate
     this.code = validatedMetadata.code;
     this.cause = validatedMetadata.cause;
     this.context = validatedMetadata.context;
