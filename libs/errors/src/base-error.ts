@@ -28,7 +28,7 @@ export class BaseError extends Error {
   /**
    * Creates an instance of BaseError.
    * Validates the input metadata using Zod to ensure data integrity.
-   * * @param message The human-readable error message.
+   * @param message The human-readable error message.
    * @param metadata Structured metadata, validated against ErrorMetadataSchema.
    * @throws {Error} Throws an error if the provided metadata fails Zod validation.
    */
@@ -74,7 +74,7 @@ export class BaseError extends Error {
   /**
    * Returns a plain object representation, useful for structured logging or serialization.
    * Includes normalized cause and the full stack trace.
-   * * @returns {object} A plain object with error details.
+   * @returns {object} A plain object with error details.
    */
   toJSON(): object {
     const normalizedCause =
