@@ -1,15 +1,15 @@
 import { z } from 'zod';
 
-export const NODE_ENVS = {
-  DEVELOPMENT: 'development',
-  TESTING: 'testing',
-  STAGING: 'staging',
-  PRODUCTION: 'production',
-} as const;
+import { ValidationError } from '@famiglio/errors';
 
-const NODE_ENV_VALUES = Object.values(NODE_ENVS);
+export const NODE_ENVS = [
+  'development',
+  'testing',
+  'staging',
+  'production',
+] as const;
 
-export const NodeEnvSchema = z.enum(NODE_ENV_VALUES);
+export const NodeEnvSchema = z.enum(NODE_ENVS);
 
 export const NodeEnvEnum = NodeEnvSchema.enum;
 
@@ -17,14 +17,22 @@ export type NodeEnv = z.infer<typeof NodeEnvSchema>;
 
 /**
  * Parses NODE_ENV value from process.env
- * @returns The parsed NODE_ENV.
- * @throws Error when not correctly defined.
+ * @returns {NodeEnv} The validated NODE_ENV string.
+ * @throws {ValidationError} Error when not correctly defined.
  */
 export function getNodeEnv(): NodeEnv {
-  const result = NodeEnvSchema.safeParse(process.env.NODE_ENV);
+  const rawNodeEnv = process.env.NODE_ENV;
+  const result = NodeEnvSchema.safeParse(rawNodeEnv);
 
   if (!result.success) {
-    throw new Error('Incorrect NODE_ENV value', { cause: result.error });
+    throw new ValidationError(
+      'Incorrect NODE_ENV environment variable',
+      result.error,
+      {
+        provided: rawNodeEnv,
+        expected: NODE_ENVS.join('|'),
+      }
+    );
   }
 
   return result.data;

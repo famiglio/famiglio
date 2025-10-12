@@ -59,6 +59,11 @@
   },
   "nx": {
     "name": "server-utils",
+    "tags": [
+      "type:lib",
+      "scope:backend",
+      "lib:server-utils"
+    ],
     "targets": {
       "build": {
         "executor": "nx:run-commands",
