@@ -2,18 +2,11 @@
   "name": "@famiglio/errors",
   "version": "0.0.1",
   "private": true,
-  "description": "Famiglio server utilities",
+  "description": "Famiglio custom error classes",
   "keywords": [
     "famiglio",
-    "server",
-    "utils",
-    "utilities",
-    "express",
-    "node",
-    "backend",
-    "logger",
-    "pino",
-    "pino-pretty"
+    "errors",
+    "error"
   ],
   "homepage": "https://github.com/famiglio/famiglio#readme",
   "bugs": {
@@ -52,7 +45,8 @@
     "name": "errors",
     "tags": [
       "type:lib",
-      "scope:errors"
+      "scope:shared",
+      "lib:errors"
     ],
     "targets": {
       "build": {
