@@ -1,0 +1,89 @@
+{
+  "name": "@famiglio/errors",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Famiglio server utilities",
+  "keywords": [
+    "famiglio",
+    "server",
+    "utils",
+    "utilities",
+    "express",
+    "node",
+    "backend",
+    "logger",
+    "pino",
+    "pino-pretty"
+  ],
+  "homepage": "https://github.com/famiglio/famiglio#readme",
+  "bugs": {
+    "url": "https://github.com/famiglio/famiglio/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/famiglio/famiglio"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@famiglio/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "nx": {
+    "name": "errors",
+    "tags": [
+      "type:lib",
+      "scope:errors"
+    ],
+    "targets": {
+      "build": {
+        "executor": "nx:run-commands",
+        "inputs": [
+          "production"
+        ],
+        "outputs": [
+          "{projectRoot}/dist"
+        ],
+        "options": {
+          "cwd": "{projectRoot}",
+          "parallel": false,
+          "commands": [
+            "tsdown",
+            "tsc -p tsconfig.lib.json"
+          ]
+        }
+      },
+      "watch": {
+        "executor": "nx:run-commands",
+        "inputs": [
+          "default"
+        ],
+        "options": {
+          "cwd": "{projectRoot}",
+          "commands": [
+            "tsdown --watch"
+          ]
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.2",
+    "typescript": "^5.9.3"
+  }
+}
