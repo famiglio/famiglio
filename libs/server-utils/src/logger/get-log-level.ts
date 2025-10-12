@@ -16,14 +16,10 @@ export function getLogLevel(): LogLevel {
   const result = LogLevelSchema.safeParse(rawLevel);
 
   if (!result.success) {
-    throw new ValidationError(
-      'Invalid log level',
-      result.error,
-      {
-        provided: rawLevel,
-        expected: LOG_LEVELS.join('|'),
-      }
-    );
+    throw new ValidationError('Invalid log level', result.error, {
+      provided: rawLevel,
+      expected: LOG_LEVELS.join('|'),
+    });
   }
 
   return result.data;

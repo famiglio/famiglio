@@ -1,5 +1,5 @@
-import { ErrorMetadataSchema } from './schema.js';
 import type { ErrorMetadataInput, ErrorMetadataOutput } from './schema.js';
+import { ErrorMetadataSchema } from './schema.js';
 
 /**
  * Base class for all custom errors.
@@ -56,12 +56,15 @@ export class BaseError extends Error {
    * @returns The parsed and validated metadata.
    * @throws {Error} If Zod validation fails.
    */
-  private validateMetadata(input: ErrorMetadataInput, parentErrorMessage: string): ErrorMetadataOutput {
+  private validateMetadata(
+    input: ErrorMetadataInput,
+    parentErrorMessage: string
+  ): ErrorMetadataOutput {
     const result = ErrorMetadataSchema.safeParse(input);
 
     if (!result.success) {
       const errorMessage = `Invalid metadata provided for error "${parentErrorMessage}" (Code: ${input.code || 'N/A'}).`;
-      
+
       throw new Error(errorMessage, { cause: result.error });
     }
 

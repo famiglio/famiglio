@@ -25,14 +25,10 @@ export function getNodeEnv(): NodeEnv {
   const result = NodeEnvSchema.safeParse(rawNodeEnv);
 
   if (!result.success) {
-    throw new ValidationError(
-      'Invalid Node Env',
-      result.error,
-      {
-        provided: rawNodeEnv,
-        expected: NODE_ENVS.join('|'),
-      }
-    );
+    throw new ValidationError('Invalid Node Env', result.error, {
+      provided: rawNodeEnv,
+      expected: NODE_ENVS.join('|'),
+    });
   }
 
   return result.data;
