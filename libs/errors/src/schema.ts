@@ -7,7 +7,7 @@ import { z } from 'zod';
 export const ErrorMetadataSchema = z
   .object({
     /**
-     * Machine-readable error code (e.g., "CONFIG_INVALID"). Required.
+     * Machine-readable error code (e.g., "VALIDATION_ERROR"). Required.
      */
     code: z.string().min(1, 'Error code cannot be empty'),
     /**
