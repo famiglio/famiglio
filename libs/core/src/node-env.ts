@@ -26,7 +26,7 @@ export function getNodeEnv(): NodeEnv {
 
   if (!result.success) {
     throw new ValidationError(
-      'Incorrect NODE_ENV environment variable',
+      'Invalid Node Env',
       result.error,
       {
         provided: rawNodeEnv,
