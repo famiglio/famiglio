@@ -3,14 +3,14 @@ import { z } from 'zod';
 /**
  * Supported log levels for Famiglio logger.
  */
-export const LOG_LEVELS = {
-  TRACE: 'trace',
-  DEBUG: 'debug',
-  INFO: 'info',
-  WARN: 'warn',
-  ERROR: 'error',
-  FATAL: 'fatal',
-} as const;
+export const LOG_LEVELS = [
+  'trace',
+  'debug',
+  'info',
+  'warn',
+  'error',
+  'fatal',
+] as const;
 
 /**
  * Array of valid log level string values.
