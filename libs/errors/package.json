@@ -2,11 +2,12 @@
   "name": "@famiglio/errors",
   "version": "0.0.1",
   "private": true,
-  "description": "Famiglio custom error classes",
+  "description": "Custom error classes and utilities for Famiglio",
   "keywords": [
     "famiglio",
     "errors",
-    "error"
+    "error-handling",
+    "exceptions"
   ],
   "homepage": "https://github.com/famiglio/famiglio#readme",
   "bugs": {
@@ -35,7 +36,8 @@
     "LICENSE"
   ],
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/node": "^24.7.2",

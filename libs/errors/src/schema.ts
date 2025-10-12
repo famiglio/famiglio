@@ -25,3 +25,5 @@ export const ErrorMetadataSchema = z
  * Defines the structure for structured error metadata.
  */
 export type ErrorMetadata = z.infer<typeof ErrorMetadataSchema>;
+export type ErrorMetadataInput = z.input<typeof ErrorMetadataSchema>;
+export type ErrorMetadataOutput = z.output<typeof ErrorMetadataSchema>;

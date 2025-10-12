@@ -1,6 +1,8 @@
+// base-error.ts
 import { ZodError } from 'zod';
 
 import { ErrorMetadata, ErrorMetadataSchema } from './schema.js';
+import type { ErrorMetadataInput, ErrorMetadataOutput } from './schema.js';
 
 /**
  * Base class for all custom errors.
@@ -33,27 +35,15 @@ export class BaseError extends Error {
    * @param metadata Structured metadata, validated against ErrorMetadataSchema.
    * @throws {Error} Throws an error if the provided metadata fails Zod validation.
    */
-  constructor(message: string, metadata: Partial<ErrorMetadata>) {
+  constructor(message: string, metadata: ErrorMetadataInput) {
     super(message);
 
     // Set the name to the correct class name (e.g., 'ValidationError' if a subclass is instantiated)
     this.name = new.target.name;
 
-    let validatedMetadata: ErrorMetadata;
-    try {
-      // Validate metadata using Zod
-      validatedMetadata = ErrorMetadataSchema.parse(metadata);
-    } catch (error) {
-      if (error instanceof ZodError) {
-        // Wrap Zod validation failures into a clearer error
-        throw new Error(
-          `Invalid metadata provided for error "${message}" (Code: ${metadata.code || 'N/A'}): ${error.message}`
-        );
-      }
-      throw error;
-    }
+    const validatedMetadata = this.validateMetadata(metadata, message);
 
-    // Assign validated properties
+    // Assegna le proprietà validate
     this.code = validatedMetadata.code;
     this.cause = validatedMetadata.cause;
     this.context = validatedMetadata.context;
@@ -63,12 +53,31 @@ export class BaseError extends Error {
   }
 
   /**
+   * Validates the input metadata against the schema using `safeParse`.
+   * Throws a clear Error if validation fails, wrapping the original ZodError as the cause.
+   * @param input The raw input metadata.
+   * @param parentErrorMessage The message of the error being constructed, for context in the thrown error.
+   * @returns The parsed and validated metadata.
+   * @throws {Error} If Zod validation fails.
+   */
+  private validateMetadata(input: ErrorMetadataInput, parentErrorMessage: string): ErrorMetadataOutput {
+    const result = ErrorMetadataSchema.safeParse(input);
+
+    if (!result.success) {
+      const errorMessage = `Invalid metadata provided for error "${parentErrorMessage}" (Code: ${input.code || 'N/A'}).`;
+      
+      throw new Error(errorMessage, { cause: result.error });
+    }
+
+    return result.data;
+  }
+
+  /**
    * Returns a plain object representation, useful for structured logging or serialization.
    * Includes normalized cause and the full stack trace.
    * * @returns {object} A plain object with error details.
    */
   toJSON(): object {
-    // Normalize the cause if it's an Error instance, otherwise keep it as is.
     const normalizedCause =
       this.cause instanceof Error
         ? {

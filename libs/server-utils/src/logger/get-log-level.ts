@@ -17,7 +17,7 @@ export function getLogLevel(): LogLevel {
 
   if (!result.success) {
     throw new ValidationError(
-      'Invalid LOG_LEVEL environment variable',
+      'Invalid log level',
       result.error,
       {
         provided: rawLevel,
