@@ -13,14 +13,9 @@ export const LOG_LEVELS = [
 ] as const;
 
 /**
- * Array of valid log level string values.
- */
-const LOG_LEVEL_VALUES = Object.values(LOG_LEVELS);
-
-/**
  * Zod schema to validate a log level string.
  */
-export const LogLevelSchema = z.enum(LOG_LEVEL_VALUES);
+export const LogLevelSchema = z.enum(LOG_LEVELS);
 
 /**
  * Exported enum-like object for easier access to log levels.

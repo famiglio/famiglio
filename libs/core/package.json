@@ -37,6 +37,7 @@
     "LICENSE"
   ],
   "dependencies": {
+    "@famiglio/errors": "^0.0.1",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
@@ -49,7 +50,8 @@
     "name": "core",
     "tags": [
       "type:lib",
-      "scope:shared"
+      "scope:shared",
+      "lib:core"
     ],
     "targets": {
       "build": {

@@ -7,6 +7,9 @@
       "path": "../core"
     },
     {
+      "path": "../errors"
+    },
+    {
       "path": "./tsconfig.lib.json"
     }
   ]

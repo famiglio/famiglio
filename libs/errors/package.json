@@ -1,19 +1,13 @@
 {
-  "name": "@famiglio/server-utils",
+  "name": "@famiglio/errors",
   "version": "0.0.1",
   "private": true,
-  "description": "Famiglio server utilities",
+  "description": "Custom error classes and utilities for Famiglio",
   "keywords": [
     "famiglio",
-    "server",
-    "utils",
-    "utilities",
-    "express",
-    "node",
-    "backend",
-    "logger",
-    "pino",
-    "pino-pretty"
+    "errors",
+    "error-handling",
+    "exceptions"
   ],
   "homepage": "https://github.com/famiglio/famiglio#readme",
   "bugs": {
@@ -32,11 +26,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
-    },
-    "./logger": {
-      "types": "./dist/logger/index.d.ts",
-      "import": "./dist/logger/index.js",
-      "default": "./dist/logger/index.js"
     }
   },
   "main": "./dist/index.js",
@@ -47,24 +36,19 @@
     "LICENSE"
   ],
   "dependencies": {
-    "@famiglio/core": "^0.0.1",
-    "@famiglio/errors": "^0.0.1",
-    "pino": "^10.0.0",
-    "pino-pretty": "^13.1.2",
     "tslib": "^2.3.0",
     "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/node": "^24.7.2",
-    "tsdown": "^0.15.6",
     "typescript": "^5.9.3"
   },
   "nx": {
-    "name": "server-utils",
+    "name": "errors",
     "tags": [
       "type:lib",
-      "scope:backend",
-      "lib:server-utils"
+      "scope:shared",
+      "lib:errors"
     ],
     "targets": {
       "build": {
