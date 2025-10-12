@@ -4,7 +4,7 @@
   "files": [],
   "references": [
     {
-      "path": "./libs/server/utils"
+      "path": "./libs/server-utils"
     },
     {
       "path": "./libs/core"
