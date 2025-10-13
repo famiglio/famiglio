@@ -23,7 +23,7 @@
     "type": "git",
     "url": "https://github.com/famiglio/famiglio"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "type": "module",
   "exports": {
     "./package.json": "./package.json",
@@ -43,8 +43,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist",
-    "LICENSE"
+    "dist"
   ],
   "dependencies": {
     "@famiglio/core": "^0.0.1",

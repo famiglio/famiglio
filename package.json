@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/famiglio/famiglio"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "workspaces": [
     "apps/*",
     "libs/*"

@@ -9,5 +9,8 @@ export default defineConfig([
     clean: true,
     outDir: 'dist',
     sourcemap: true,
+    outputOptions: {
+      legalComments: 'inline',
+    },
   },
 ]);
