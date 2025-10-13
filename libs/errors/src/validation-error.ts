@@ -9,7 +9,7 @@ import { BaseError } from './base-error.js';
 export class ValidationError extends BaseError {
   /**
    * Creates an instance of ValidationError.
-   * * @param message The human-readable error message detailing what failed validation.
+   * @param message The human-readable error message detailing what failed validation.
    * @param cause Optional original error or value that triggered the validation failure (e.g., a ZodError).
    * @param context Optional additional context, such as the path to the invalid config file or the specific setting that failed.
    */
