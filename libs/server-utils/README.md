@@ -47,6 +47,6 @@ Example output (development mode):
 
 ---
 
-## ✦ License
+## License
 
-MIT © [Famiglio](https://github.com/famiglio)
+Apache-2.0 © 2025 [Davide Di Criscito](https://github.com/famiglio)

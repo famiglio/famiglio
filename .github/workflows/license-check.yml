@@ -1,17 +1,19 @@
-name: Check and Fix Workspace
+name: License Header Check
 
 on:
-  workflow_run:
-    workflows: ["License Header Check"]
-    types:
-      - completed
-
+  push:
+    branches-ignore:
+      - main
   pull_request:
     branches:
       - main
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
 
 jobs:
-  "workspace-fixes":
+  license:
     if: github.event_name != 'push' || github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
@@ -32,27 +34,23 @@ jobs:
           ref: ${{ github.ref }}
           fetch-depth: 0
 
-      - name: Setup Node.js (Read from .nvmrc)
-        uses: actions/setup-node@v5
-        with:
-          node-version-file: ".nvmrc"
-          cache: "npm"
+      - name: Set execute permission on license-check.sh
+        run: chmod +x ./scripts/license-check.sh
 
-      - name: Install Dependencies
-        run: npm install --ignore-scripts
-
-      - name: Sync Workspace
-        run: npx nx sync
-
-      - name: Lint Code with ESLint
-        run: npx eslint --fix .
-
-      - name: Format Code with Prettier
-        run: npx prettier --write .
+      - name: Run license header check
+        id: check
+        run: |
+          RESULT=$(./scripts/license-check.sh)
+          echo "$RESULT"
+          if echo "$RESULT" | grep -q 'headers-added=true'; then
+            echo "headers-added=true" >> $GITHUB_OUTPUT
+          else
+            echo "headers-added=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Auto-Commit Files
-        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        if: ${{ github.event_name == 'pull_request' && steps.check.outputs.headers-added == 'true' && github.event.pull_request.head.repo.full_name == github.repository }}
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "ci: lint and format"
+          commit_message: "ci: add/update license headers"
           branch: ${{ github.head_ref }}

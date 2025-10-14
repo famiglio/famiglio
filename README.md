@@ -17,4 +17,4 @@ Under active development — we’re currently building the core libraries and G
 
 ## License
 
-[MIT License](./LICENSE)
+Apache-2.0 © 2025 [Davide Di Criscito](https://github.com/famiglio)
