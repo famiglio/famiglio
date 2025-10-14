@@ -62,8 +62,7 @@
           "cwd": "{projectRoot}",
           "parallel": false,
           "commands": [
-            "tsdown",
-            "tsc -p tsconfig.lib.json"
+            "tsdown"
           ]
         }
       },
